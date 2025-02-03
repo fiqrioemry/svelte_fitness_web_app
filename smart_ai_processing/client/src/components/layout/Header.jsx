@@ -1,27 +1,19 @@
-import UserMenu from "./UserMenu";
 import { cn } from "@/lib/utils.js";
 import { navigationMenu } from "../../config";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useProvider } from "../../context/GlobalProvider";
-import { useAuthStore } from "../../store/useAuthStore";
-
 const Header = () => {
   const location = useLocation();
-  const { user } = useProvider();
-  const { userLogout } = useAuthStore();
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(window.scrollY);
 
-  // Cek apakah path diawali dengan /seeker atau /employer
   const isSeekerOrEmployerPath =
     location.pathname.startsWith("/seeker") ||
     location.pathname.startsWith("/employer");
 
   useEffect(() => {
     if (isSeekerOrEmployerPath) {
-      // Jika path diawali dengan /seeker atau /employer, jangan jalankan handleScroll
       return;
     }
 
@@ -36,7 +28,7 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isSeekerOrEmployerPath]); // Tambahkan isSeekerOrEmployerPath sebagai dependency
+  }, [isSeekerOrEmployerPath]);
 
   return (
     <header
@@ -51,54 +43,38 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-2 md:px-6 py-4">
-        <div
-          className={`flex items-center ${
-            isSeekerOrEmployerPath ? "justify-end" : "justify-between"
-          }`}
-        >
-          {/* Logo hanya ditampilkan jika bukan di halaman seeker/employer */}
-          {!isSeekerOrEmployerPath && (
-            <Link
-              to="/"
-              className="font-semibold capitalize text-2xl tracking-[2px]"
-            >
-              Job
-              <span className="font-bold text-blue-500">NEST</span>
+        <div className="flex items-center justify-between">
+          <Link
+            to="/"
+            className="font-semibold capitalize text-2xl tracking-[2px]"
+          >
+            Job
+            <span className="font-bold text-blue-500">NEST</span>
+          </Link>
+
+          <nav className="space-x-3">
+            {navigationMenu.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  to={item.path}
+                  key={item.path}
+                  className={cn(
+                    "font-medium capitalize",
+                    isActive ? "text-blue-500" : "text-gray-600"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="space-x-3">
+            <Link to="/auth/login">
+              <Button>Get started</Button>
             </Link>
-          )}
-
-          {/* Sembunyikan navigationMenu jika path diawali dengan /seeker atau /employer */}
-          {!isSeekerOrEmployerPath && (
-            <nav className="space-x-3">
-              {navigationMenu.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    to={item.path}
-                    key={item.path}
-                    className={cn(
-                      "font-medium capitalize",
-                      isActive ? "text-blue-500" : "text-gray-600"
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
-            </nav>
-          )}
-
-          {!user ? (
-            <div className="space-x-3">
-              <Link to="/auth/login">
-                <Button>Get started</Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="space-x-3">
-              <UserMenu user={user} userLogout={userLogout} />
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </header>

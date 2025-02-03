@@ -1,28 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+
 import { Toaster } from "react-hot-toast";
 import { createContext, useContext } from "react";
-import { useAuthStore } from "../store/useAuthStore";
-import PageLoading from "../components/PageLoading";
-
 const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const { isAuthenticate, userAuthCheck, user } = useAuthStore();
-
-  useEffect(() => {
-    userAuthCheck();
-  }, [userAuthCheck]);
-
   return (
-    <GlobalContext.Provider
-      value={{
-        isAuthenticate,
-        user,
-      }}
-    >
+    <GlobalContext.Provider>
       <Toaster />
-      {isAuthenticate === null ? <PageLoading /> : children}
+      {children}
     </GlobalContext.Provider>
   );
 };

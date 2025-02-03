@@ -12,7 +12,7 @@ export default function DownloadProgress() {
     setStatus("Downloading...");
 
     const eventSource = new EventSource(
-      `http://localhost:8000/download?url=${encodeURIComponent(videoURL)}`
+      `http://localhost:8080/download?url=${encodeURIComponent(videoURL)}`
     );
 
     eventSource.onmessage = (event) => {
