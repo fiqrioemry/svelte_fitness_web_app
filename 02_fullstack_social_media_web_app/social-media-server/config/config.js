@@ -7,7 +7,7 @@ module.exports = {
     username: DB_USERNAME,
     password: DB_PASSWORD,
     database: DB_DATABASE,
-    host: DB_HOST,
+    host: DB_HOST || 'db',
     dialect: 'mysql',
     logging: false,
   },
