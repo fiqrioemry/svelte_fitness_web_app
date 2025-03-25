@@ -16,7 +16,6 @@ COPY . .
 # Expose port yang digunakan oleh aplikasi
 EXPOSE 5000
 
-
 # SET NODE_ENV agar sequelize bisa baca config dengan benar
 ENV NODE_ENV=development
 

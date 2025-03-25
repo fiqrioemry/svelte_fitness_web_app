@@ -24,8 +24,10 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import useAuthChecking from "./hooks/useAuthChecking";
 import { AuthRoute, NonAuthRoute } from "./middleware";
+import useTheme from "./hooks/useTheme";
 
 function App() {
+  useTheme();
   const { checkingAuth, location, background } = useAuthChecking();
 
   if (checkingAuth) return <PageLoading />;

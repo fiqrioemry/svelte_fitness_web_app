@@ -3,28 +3,8 @@ services:
     build: .
     ports:
       - "5000:5000"
-    environment:
-      - SERVER_API_KEY=${SERVER_API_KEY}
-      - SERVER_PORT=${SERVER_PORT}
-      - NODE_ENV=${NODE_ENV}
-      - CLIENT_HOST=${CLIENT_HOST}
-      - REFRESH_TOKEN=${REFRESH_TOKEN}
-      - ACCESS_TOKEN=${ACCESS_TOKEN}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_HOST=${DB_HOST}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE=${DB_DATABASE}
-      - CLOUD_NAME=${CLOUD_NAME}
-      - API_KEY=${API_KEY}
-      - API_SECRET=${API_SECRET}
-      - CLOUD_FOLDER=${CLOUD_FOLDER}
-      - USER_EMAIL=${USER_EMAIL}
-      - USER_PASSWORD=${USER_PASSWORD}
-      - REDIS_PORT=${REDIS_PORT}
-      - REDIS_HOST=${REDIS_HOST}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - GOOGLE_CALLBACK_URL=${GOOGLE_CALLBACK_URL}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+    env_file:
+      - .env
     depends_on:
       db:
         condition: service_healthy
@@ -32,8 +12,6 @@ services:
         condition: service_healthy
       cassandra:
         condition: service_healthy
-    env_file:
-      - .env
 
   db:
     image: mysql:8.0

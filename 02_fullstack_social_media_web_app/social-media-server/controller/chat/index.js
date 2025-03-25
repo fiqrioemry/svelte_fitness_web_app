@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const client = require('../../config/cassandra');
+const { client } = require('../../config/cassandra');
 const { Chat, Profile, User } = require('../../models');
 const { getReceiverSocketId, io } = require('../../config/socket');
 const uploadToCloudinary = require('../../utils/uploadToCloudinary');

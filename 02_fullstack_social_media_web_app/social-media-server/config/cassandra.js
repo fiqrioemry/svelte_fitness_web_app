@@ -26,10 +26,9 @@ async function initCassandra() {
     // Buat tabel jika belum ada
     await client.execute(`
       CREATE TABLE IF NOT EXISTS messages (
-        id UUID PRIMARY KEY,
-        chat_id UUID,
-        sender_id UUID,
-        receiver_id UUID,
+        chat_id UUID PRIMARY KEY,
+        sender_id INT,
+        receiver_id INT,
         message TEXT,
         image TEXT,
         timestamp TIMESTAMP
