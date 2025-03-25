@@ -10,7 +10,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      cassandra:
+      mongodb:
         condition: service_healthy
 
   db:
@@ -40,28 +40,16 @@ services:
       timeout: 10s
       retries: 5
 
-  cassandra:
-    image: cassandra:4.1
+  mongodb:
+    image: mongo:6
+    command: ["--quiet"]
+    container_name: mongodb
     ports:
-      - "9042:9042"
+      - "27017:27017"
     volumes:
-      - cassandra_data:/var/lib/cassandra
-    environment:
-      - CASSANDRA_CLUSTER_NAME=chat_cluster
-      - CASSANDRA_DC=datacenter1
-      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - mongodb_data:/data/db
     healthcheck:
-      test:
-        [
-          "CMD",
-          "cqlsh",
-          "-u",
-          "cassandra",
-          "-p",
-          "cassandra",
-          "-e",
-          "DESCRIBE KEYSPACES",
-        ]
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
       timeout: 10s
       retries: 5
@@ -69,4 +57,4 @@ services:
 volumes:
   db_data:
   redis_data:
-  cassandra_data:
+  mongodb_data:

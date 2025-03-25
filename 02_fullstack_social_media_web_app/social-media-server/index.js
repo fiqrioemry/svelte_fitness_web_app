@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const limiter = require('./middleware/limiter');
 const verifyApiKey = require('./middleware/apikey');
 const { app, server } = require('./config/socket');
-const { initCassandra } = require('./config/cassandra');
+const { initMongoDB } = require('./config/mongodb');
 
 const CLIENT_HOST = process.env.CLIENT_HOST;
 const SERVER_PORT = process.env.SERVER_PORT;
@@ -34,6 +34,6 @@ app.use('/api/post', services.postRoute);
 app.use('/api/chat', services.chatRoute);
 
 server.listen(SERVER_PORT, async () => {
-  await initCassandra();
+  await initMongoDB();
   console.log(`✅ Connected to Server on port ${SERVER_PORT}`);
 });

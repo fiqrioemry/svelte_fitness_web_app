@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { client } = require('../../config/cassandra');
+const Message = require('../../models/message');
 const { Chat, Profile, User } = require('../../models');
 const { getReceiverSocketId, io } = require('../../config/socket');
 const uploadToCloudinary = require('../../utils/uploadToCloudinary');
@@ -92,23 +92,14 @@ async function sendChat(req, res) {
       }
     }
 
-    const query =
-      'INSERT INTO messages (chat_id, sender_id, receiver_id, message, image, timestamp) VALUES (?, ?, ?, ?, ?, ?)';
-
-    await client.execute(
-      query,
-      [chatId, senderId, receiverId, message, image, timestamp],
-      { prepare: true },
-    );
-
-    const newChat = {
+    const newChat = await Message.create({
       chatId,
       senderId,
       receiverId,
       message,
       image,
       timestamp,
-    };
+    });
 
     const receiverSocketId = getReceiverSocketId(receiverId);
 
@@ -153,25 +144,23 @@ async function getChat(req, res) {
     }
 
     const chat_id = prevChat.id;
-    const query = `SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC`;
-    const result = await client.execute(query, [chat_id], { prepare: true });
-
-    if (!result || result.rows.length === 0) {
+    const result = await Message.find({ chatId: chat_id }).sort({
+      timestamp: 1,
+    });
+    if (!result || result.length === 0) {
       return res
         .status(200)
         .json({ message: 'No chat found in history', chat: [] });
     }
 
-    const chat = result.rows.map((chat) => {
-      return {
-        chatId: chat.chat_id,
-        senderId: chat.sender_id,
-        receiverId: chat.receiver_id,
-        image: chat.image,
-        message: chat.message,
-        timestamp: chat.timestamp,
-      };
-    });
+    const chat = result.map((chat) => ({
+      chatId: chat.chatId,
+      senderId: chat.senderId,
+      receiverId: chat.receiverId,
+      image: chat.image,
+      message: chat.message,
+      timestamp: chat.timestamp,
+    }));
 
     res.status(200).json({ message: 'Success fetch chat', chat });
   } catch (error) {
