@@ -41,7 +41,9 @@ const PostDetailDialog = () => {
   return (
     <Drawer open={true} onOpenChange={(open) => !open && navigate(-1)}>
       <DrawerContent>
-        {post ? <DialogDisplay post={post} /> : <PostDetailLoading />}
+        <DialogTitle>
+          {post ? <DialogDisplay post={post} /> : <PostDetailLoading />}
+        </DialogTitle>
       </DrawerContent>
     </Drawer>
   );

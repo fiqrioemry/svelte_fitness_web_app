@@ -14,7 +14,7 @@ const PostControl = ({ post }) => {
         <BookmarkButton data={post} />
       </div>
 
-      <div className="text-sm md:text-md">
+      <div className="text-sm md:text-md min-h-12">
         <LikeCount data={post} />
         {formatDateToISO(post.createdAt)}
       </div>
