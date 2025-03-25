@@ -7,10 +7,8 @@ WORKDIR /app
 # Copy package.json dan package-lock.json
 COPY package*.json ./
 
-RUN npm install -g nodemon
-
 # Install dependencies
-RUN npm install
+RUN npm install && npm install -g nodemon
 
 # Copy semua file project ke working directory
 COPY . .
@@ -18,5 +16,9 @@ COPY . .
 # Expose port yang digunakan oleh aplikasi
 EXPOSE 5000
 
+
+# SET NODE_ENV agar sequelize bisa baca config dengan benar
+ENV NODE_ENV=development
+
 # Command untuk menjalankan aplikasi
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm run dev"]

@@ -1,6 +1,5 @@
-const fs = require('fs').promises;
 const { Op } = require('sequelize');
-const cassandra = require('../../config/cassandra');
+const client = require('../../config/cassandra');
 const { Chat, Profile, User } = require('../../models');
 const { getReceiverSocketId, io } = require('../../config/socket');
 const uploadToCloudinary = require('../../utils/uploadToCloudinary');
@@ -96,7 +95,7 @@ async function sendChat(req, res) {
     const query =
       'INSERT INTO messages (chat_id, sender_id, receiver_id, message, image, timestamp) VALUES (?, ?, ?, ?, ?, ?)';
 
-    await cassandra.execute(
+    await client.execute(
       query,
       [chatId, senderId, receiverId, message, image, timestamp],
       { prepare: true },
@@ -155,7 +154,7 @@ async function getChat(req, res) {
 
     const chat_id = prevChat.id;
     const query = `SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC`;
-    const result = await cassandra.execute(query, [chat_id], { prepare: true });
+    const result = await client.execute(query, [chat_id], { prepare: true });
 
     if (!result || result.rows.length === 0) {
       return res

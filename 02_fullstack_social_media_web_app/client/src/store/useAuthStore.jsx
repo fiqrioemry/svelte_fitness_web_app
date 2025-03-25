@@ -44,7 +44,7 @@ export const useAuthStore = create((set, get) => ({
         toast.success(message);
         set({ step: 3 });
       } else if (step === 3) {
-        const { message } = await callApi.register(formData);
+        const { message } = await callApi.signup(formData);
         toast.success(message);
         set({ step: 1 });
         navigate("/signin");

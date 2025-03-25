@@ -53,6 +53,10 @@ export const useChatStore = create((set, get) => ({
     if (!selectedUser) return;
 
     const socket = useAuthStore.getState().socket;
+    if (!socket) {
+      console.warn("Socket belum tersedia di subscribeToMessages.");
+      return;
+    }
 
     socket.on("newChat", (newChat) => {
       const isMessageSentFromSelectedUser =

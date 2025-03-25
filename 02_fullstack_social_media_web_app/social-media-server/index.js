@@ -8,12 +8,12 @@ const cookieParser = require('cookie-parser');
 const limiter = require('./middleware/limiter');
 const verifyApiKey = require('./middleware/apikey');
 const { app, server } = require('./config/socket');
+const { initCassandra } = require('./config/cassandra');
 
 const CLIENT_HOST = process.env.CLIENT_HOST;
 const SERVER_PORT = process.env.SERVER_PORT;
 
 app.use(limiter);
-
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.json({ limit: '10mb' }));
@@ -33,6 +33,7 @@ app.use('/api/user', services.userRoute);
 app.use('/api/post', services.postRoute);
 app.use('/api/chat', services.chatRoute);
 
-server.listen(SERVER_PORT, () => {
+server.listen(SERVER_PORT, async () => {
+  await initCassandra();
   console.log(`✅ Connected to Server on port ${SERVER_PORT}`);
 });
