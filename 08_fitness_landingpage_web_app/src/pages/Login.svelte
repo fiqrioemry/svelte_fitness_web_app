@@ -1,19 +1,12 @@
    
     <script>
-        function showDemoNotification(
-          event,
-          customMessage = "Ini adalah demo aplikasi. Fitur login belum diimplementasikan."
-        ) {
-          event.preventDefault();
-          const notification = document.getElementById("demo-notification");
-          notification.textContent = customMessage;
-          notification.classList.remove("translate-y-full", "opacity-0");
-  
-          setTimeout(() => {
-            notification.classList.add("translate-y-full", "opacity-0");
-          }, 3000);
+         import { toast } from "svelte-sonner";
+        function showNotification(){
+            toast.success("This feature is on demo", {
+                description: "Sunday, December 03, 2023 at 9:00 AM",})
         }
-      </script>
+
+    </script>
    
    <!-- Login Form -->
     <div
@@ -38,6 +31,7 @@
           class="mt-8 space-y-6"
           action="#"
           method="POST"
+          on:submit={showNotification}
         >
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
