@@ -1,6 +1,30 @@
+   
 <script>
-</script>
-
+    import { link } from 'svelte-spa-router';
+    import { toast } from "svelte-sonner";
+  
+    let email = '';
+    let name ="";
+    let password = '';
+    let confirm_password = '';
+    let terms = false;
+  
+    function showNotification(event) {
+      event.preventDefault();
+  
+      const data = {
+        email,
+        name,
+        password,
+        terms,
+      };
+  
+      toast.success("Demo Fitur Registerasi Berhasil", {
+        description: JSON.stringify(data, null, 2),
+      });
+    }
+  </script>
+  
 
     <!-- Register Form -->
     <div
@@ -25,6 +49,7 @@
           class="mt-8 space-y-6"
           action="#"
           method="POST"
+          on:submit={showNotification}
         >
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
@@ -32,6 +57,7 @@
               <input
                 id="name"
                 name="name"
+                bind:value={name}
                 type="text"
                 required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
@@ -44,6 +70,7 @@
                 id="email"
                 name="email"
                 type="email"
+                bind:value={email}
                 required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Email"
@@ -55,6 +82,7 @@
                 id="password"
                 name="password"
                 type="password"
+                bind:value={password}
                 required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Password"
@@ -66,7 +94,7 @@
               >
               <input
                 id="confirm-password"
-                name="confirm-password"
+                name="password_confirm"
                 type="password"
                 required
                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
@@ -80,12 +108,13 @@
               id="terms"
               name="terms"
               type="checkbox"
+              bind:checked={terms}
               required
               class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
             />
             <label for="terms" class="ml-2 block text-sm text-gray-900">
               Saya setuju dengan
-              <button on:click={console.log(true)}
+              <button 
                 class="font-medium text-primary hover:text-opacity-80"
                 >Syarat & Ketentuan</button
               >

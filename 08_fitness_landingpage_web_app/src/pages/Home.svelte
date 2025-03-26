@@ -1,5 +1,6 @@
 <script lang="ts">
     import Hero from '../components/Hero.svelte';
+    import Footer from '../components/Footer.svelte';
     import Features from '../components/Features.svelte';
     import Testimonials from '../components/Testimonials.svelte';
     import Pricing from '../components/Pricing.svelte';
@@ -14,3 +15,4 @@
   <Pricing />
   <FAQ />
   <CTASection />
+  <Footer/>
