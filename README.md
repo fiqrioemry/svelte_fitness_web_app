@@ -1,12 +1,4 @@
-project saya ini yaitu fitness landing page menggunakan svelte.
 
-
-ChatGPT said:
-Berikut file README.md singkat untuk project Fitness Landing Page kamu yang menggunakan Svelte:
-
-markdown
-Copy
-Edit
 # 🏋️‍♂️ FitLife - Fitness Landing Page
 
 FitLife adalah project landing page modern dan responsif untuk aplikasi fitness, dibangun menggunakan **Svelte**. Website ini menyajikan informasi fitur utama, testimoni pengguna, paket harga, dan FAQ dalam satu halaman dengan navigasi yang mulus.
