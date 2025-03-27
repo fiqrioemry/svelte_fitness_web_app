@@ -258,8 +258,6 @@ const callApi = {
   },
 
   sendChat: async (formData, receiverId) => {
-    console.log(formData);
-    console.log(receiverId);
     return authInstance
       .post(`/chat/${receiverId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

@@ -20,39 +20,22 @@ export const publicInstance = axios.create({
   },
 });
 
-authInstance.interceptors.request.use(
-  (config) => {
-    const { accessToken } = useAuthStore.getState();
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-
-  (error) => {
-    Promise.reject(error);
-  },
-);
-
 authInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const { logout } = useAuthStore.getState();
-    if (
-      error.response.status === 401 &&
-      error.config &&
-      !error.config.__isRetryRequest
-    ) {
-      try {
-        const accessToken = await callApi.refreshToken();
 
-        error.config.headers.Authorization = `Bearer ${accessToken}`;
+    if (error.response?.status === 401 && !error.config.__isRetryRequest) {
+      try {
+        await callApi.refreshToken();
+        error.config.__isRetryRequest = true;
         return authInstance(error.config);
       } catch (refreshError) {
         logout();
         return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   },
 );

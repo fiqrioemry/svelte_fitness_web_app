@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import AuthorCard from "@/components/home-explore/AuthorCard";
 
 const NoPostToShow = () => {
   return (
@@ -21,12 +20,7 @@ const NoPostToShow = () => {
           </div>
         </div>
 
-        {/* author card */}
-        <div className="w-5/12 hidden md:block">
-          <div className="flex justify-center ">
-            <AuthorCard />
-          </div>
-        </div>
+        <div className="w-5/12 hidden md:block"></div>
       </div>
     </div>
   );

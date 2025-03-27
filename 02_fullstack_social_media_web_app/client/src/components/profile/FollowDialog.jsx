@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 
 const FollowDialog = () => {
@@ -15,7 +15,9 @@ const FollowDialog = () => {
   return (
     <Dialog defaultOpen onOpenChange={(open) => !open && navigate(-1)}>
       <DialogContent className="sm:w-[400px] h-80 p-0 border-none bg-secondary">
-        <Outlet />
+        <DialogTitle>
+          <Outlet />
+        </DialogTitle>
       </DialogContent>
     </Dialog>
   );

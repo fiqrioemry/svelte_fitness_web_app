@@ -12,12 +12,9 @@ export const useAuthStore = create((set, get) => ({
   socket: null,
   loading: false,
   onlineUsers: [],
-  accessToken: null,
   checkingAuth: true,
 
   resetStep: () => set({ step: 1 }),
-
-  setAccessToken: (accessToken) => set({ accessToken }),
 
   authCheck: async () => {
     try {
@@ -59,8 +56,7 @@ export const useAuthStore = create((set, get) => ({
   signin: async (formData) => {
     set({ loading: true });
     try {
-      const { message, accessToken } = await callApi.signin(formData);
-      set({ accessToken });
+      const { message } = await callApi.signin(formData);
       toast.success(message);
       await get().authCheck();
     } catch (error) {
