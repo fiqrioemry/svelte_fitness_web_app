@@ -7,6 +7,10 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-white;
+    @apply bg-white text-secondary;
+  }
+
+  .nav-btn {
+    @apply hover:text-primary transition-colors;
   }
 }

@@ -1,14 +1,25 @@
    
 <script>
-    import { link } from 'svelte-spa-router';
     import { toast } from "svelte-sonner";
+    import { link } from 'svelte-spa-router';
+    import { Button } from "$lib/components/ui/button/index.ts";
+
   
     let email = '';
     let name ="";
     let password = '';
     let confirm_password = '';
     let terms = false;
-  
+
+    function isValid() {
+    return (
+    !email.trim().length ||
+    !name.trim().length ||
+    !password.trim().length ||
+    !confirm_password.trim().length  ||    !terms
+  );
+}
+
     function showNotification(event) {
       event.preventDefault();
   
@@ -23,6 +34,13 @@
         description: JSON.stringify(data, null, 2),
       });
     }
+
+    
+    function showAlert(event) {
+      event.preventDefault();
+      toast.success("Fitur ini hanya sebuah demo");
+    }
+
   </script>
   
 
@@ -38,7 +56,8 @@
           <p class="mt-2 text-center text-sm text-gray-600">
             Atau
             <a
-              href="login.html"
+              href="/login"
+              use:link
               class="font-medium text-primary hover:text-opacity-80"
             >
               masuk ke akun yang sudah ada
@@ -46,10 +65,10 @@
           </p>
         </div>
         <form
-          class="mt-8 space-y-6"
-          action="#"
-          method="POST"
-          on:submit={showNotification}
+            action="#"
+            method="POST"
+            class="mt-8 space-y-6"
+            on:submit={showNotification}
         >
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
@@ -60,7 +79,7 @@
                 bind:value={name}
                 type="text"
                 required
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                  class="appearance-none bg-transparent rounded-none relative block w-full px-3 py-2 border  rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Nama Lengkap"
               />
             </div>
@@ -72,7 +91,7 @@
                 type="email"
                 bind:value={email}
                 required
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                     class="appearance-none bg-transparent relative block w-full px-3 py-2 border  focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Email"
               />
             </div>
@@ -84,7 +103,7 @@
                 type="password"
                 bind:value={password}
                 required
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                class="appearance-none bg-transparent relative block w-full px-3 py-2 border focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
@@ -96,8 +115,9 @@
                 id="confirm-password"
                 name="password_confirm"
                 type="password"
+                bind:value={confirm_password}
                 required
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+              class="appearance-none bg-transparent rounded-none relative block w-full px-3 py-2 border rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Konfirmasi Password"
               />
             </div>
@@ -105,29 +125,25 @@
 
           <div class="flex items-center">
             <input
-              id="terms"
-              name="terms"
-              type="checkbox"
-              bind:checked={terms}
-              required
-              class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
-            />
-            <label for="terms" class="ml-2 block text-sm text-gray-900">
+            id="terms"
+            name="terms"
+            type="checkbox"
+            bind:checked={terms}
+            required
+            class="h-4 w-4 rounded bg-white border text-primary appearance-none checked:bg-primary checked:border-transparent focus:outline-none"
+          />
+            <label for="terms" class="ml-2 block text-sm">
               Saya setuju dengan
-              <button 
-                class="font-medium text-primary hover:text-opacity-80"
-                >Syarat & Ketentuan</button
+              <span class="text-primary font-medium"
+                >Syarat & Ketentuan</span
               >
             </label>
           </div>
 
           <div>
-            <button
-              type="submit"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              Daftar
-            </button>
+            <Button disabled={isValid()} type="submit">
+                Daftar
+              </Button>
           </div>
         </form>
       </div>

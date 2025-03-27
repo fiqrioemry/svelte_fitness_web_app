@@ -2,7 +2,9 @@
 <script>
     import { link } from 'svelte-spa-router';
     import { toast } from "svelte-sonner";
-  
+    import { Button } from "$lib/components/ui/button/index.ts";
+
+
     let email = '';
     let password = '';
     let rememberMe = false;
@@ -20,6 +22,19 @@
         description: JSON.stringify(data, null, 2),
       });
     }
+
+    function isValid() {
+    return (
+    !email.trim().length ||
+    !name.trim().length ||
+    !rememberMe
+  )}
+
+    function showAlert(event) {
+      event.preventDefault();
+      toast.success("Fitur Lupa password tidak aktif didemo");
+    }
+
   </script>
   
    
@@ -52,7 +67,7 @@
                 type="email"
                 bind:value={email}
                 required
-                class="appearance-none bg-transparent rounded-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                class="appearance-none bg-transparent rounded-none relative block w-full px-3 py-2 border border-gray-300  rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Email"
               />
             </div>
@@ -64,7 +79,7 @@
                 bind:value={password}
                 type="password"
                 required
-                class="appearance-none bg-transparent rounded-none relative block w-full px-3 py-2 border border-gray-300  text-gray-900 rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                class="appearance-none bg-transparent rounded-none relative block w-full px-3 py-2 border border-gray-300   rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
@@ -77,30 +92,25 @@
                 name="remember-me"
                 type="checkbox"
                 bind:checked={rememberMe}
-                class="h-4 w-4 text-primary rounded"
+                  class="h-4 w-4 rounded bg-white border text-primary appearance-none checked:bg-primary checked:border-transparent focus:outline-none"
               />
-              <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+              <label for="remember-me" class="ml-2 block text-sm">
                 Ingat saya
               </label>
             </div>
 
             <div class="text-sm">
-              <a href="/register"
-                use:link
-                class="font-medium text-primary hover:text-opacity-80"
+              <button on:click={showAlert} class="text-primary  font-medium"
               >
                 Lupa password?
-              </a>
+              </button>
             </div>
           </div>
 
           <div>
-            <button
-              type="submit"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
+            <Button disabled={isValid()} type="submit">
               Masuk
-            </button>
+            </Button>
           </div>
         </form>
       </div>

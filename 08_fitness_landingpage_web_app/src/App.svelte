@@ -9,4 +9,6 @@
 <Header />
 <Toaster />
  <slot />
+ <main class="overflow-hidden">
 <Router {routes} />
+</main>

@@ -1,55 +1,113 @@
-<div id="features" class="py-12 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h2 class="text-3xl font-extrabold text-secondary sm:text-4xl">
-        Fitur Unggulan
-      </h2>
-      <p class="mt-4 text-lg text-gray-500">
-        Program latihan yang dirancang khusus untuk kebutuhan Anda
-      </p>
-    </div>
-
-    <div class="mt-10">
-      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Program Personal -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2
+          class="text-3xl font-bold text-center text-secondary mb-12"
+          data-aos="fade-up"
+        >
+          Fitur Utama
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Personal Trainer -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-lg text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <svg
+              class="w-16 h-16 mx-auto mb-4 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              />
             </svg>
+            <h3 class="text-xl font-semibold mb-2">Personal Trainer</h3>
+            <p class="text-gray-600">
+              Pelatih berpengalaman yang akan membimbingmu mencapai target
+              fitnessmu.
+            </p>
           </div>
-          <h3 class="text-lg font-medium text-secondary">Program Personal</h3>
-          <p class="mt-2 text-gray-500">
-            Program latihan yang disesuaikan dengan tujuan dan kemampuan Anda
-          </p>
-        </div>
 
-        <!-- Video Tutorial -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          <!-- Meal Plan -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-lg text-center"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <svg
+              class="w-16 h-16 mx-auto mb-4 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
             </svg>
+            <h3 class="text-xl font-semibold mb-2">Meal Plan Sehat</h3>
+            <p class="text-gray-600">
+              Rencana makan yang disesuaikan dengan kebutuhan nutrisimu.
+            </p>
           </div>
-          <h3 class="text-lg font-medium text-secondary">Video Tutorial</h3>
-          <p class="mt-2 text-gray-500">
-            Panduan video lengkap untuk setiap gerakan latihan
-          </p>
-        </div>
 
-        <!-- Konsultasi Online -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          <!-- Progress Tracker -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-lg text-center"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <svg
+              class="w-16 h-16 mx-auto mb-4 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
             </svg>
+            <h3 class="text-xl font-semibold mb-2">Progress Tracker</h3>
+            <p class="text-gray-600">
+              Pantau perkembanganmu dengan tools tracking yang akurat.
+            </p>
           </div>
-          <h3 class="text-lg font-medium text-secondary">Konsultasi Online</h3>
-          <p class="mt-2 text-gray-500">
-            Konsultasi langsung dengan trainer berpengalaman
-          </p>
+
+          <!-- Community -->
+          <div
+            class="bg-white p-6 rounded-lg shadow-lg text-center"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <svg
+              class="w-16 h-16 mx-auto mb-4 text-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">Komunitas Supportif</h3>
+            <p class="text-gray-600">
+              Bergabung dengan komunitas yang saling mendukung.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div> 
+    </section>

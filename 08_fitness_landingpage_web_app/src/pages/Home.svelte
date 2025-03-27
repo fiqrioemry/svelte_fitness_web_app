@@ -7,6 +7,19 @@
     import FAQ from '../components/FAQ.svelte';
     import CTASection from '../components/CTASection.svelte';
     import ScrollAnimation from '../components/ScrollAnimation.svelte';
+
+  import AOS from 'aos';
+  import 'aos/dist/aos.css';
+
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    AOS.init({
+      once: true, 
+      duration: 800, 
+    });
+  });
+
   </script>
   
   <Hero />
